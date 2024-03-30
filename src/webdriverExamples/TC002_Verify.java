@@ -1,0 +1,55 @@
+package webdriverExamples;
+//To access webdriver methods & classes
+import org.openqa.selenium.WebDriver;
+//To access browser
+import org.openqa.selenium.firefox.FirefoxDriver;
+//to access object/element loc methods
+import org.openqa.selenium.By;
+
+public class TC002_Verify {
+
+static String    url     = ("http://183.82.103.245/nareshit/login.php");
+static String   username = ("nareshit");
+static String   password =("nareshit");
+static String   title1   = ("OrangeHRM - New Level of HR Management");
+static String   title2   = ("OrangeHRM");
+public static void main(String args[]) throws Exception{
+    //Test Steps
+WebDriver driver = new FirefoxDriver();
+driver.navigate().to(url);
+System.out.println("Application Opened");
+Thread.sleep(3000);
+//Verify Title
+//  Actual Title   compare Expected Title
+if(driver.getTitle().equals(title1)) {
+System.out.println("Title Matched");    
+}
+else {
+System.out.println("Title not matched");
+System.out.println(driver.getTitle());
+}
+//hard-coded:
+//driver.findElement(By.name("txtUserName")).sendKeys("nareshit");
+//driver.findElement(By.name("txtPassword")).sendKeys("nareshit");
+//Variable:
+driver.findElement(By.name("txtUserName")).sendKeys(username);
+driver.findElement(By.name("txtPassword")).sendKeys(password);
+Thread.sleep(3000);
+driver.findElement(By.name("Submit")).click();
+Thread.sleep(3000);
+System.out.println("Login completed");
+//Verify Title
+if(driver.getTitle().equals(title2)) {
+System.out.println("Title matched");    
+}
+else {
+System.out.println("Title not matched");
+System.out.println(driver.getTitle());
+}
+driver.findElement(By.linkText("Logout")).click();
+Thread.sleep(3000);
+System.out.println("Logout completed");
+System.out.println("Testing is Exellent");
+driver.close();
+}
+}
